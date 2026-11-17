@@ -12,19 +12,51 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app-shell">
+  <section class="auth-screen" id="authScreen">
+    <div class="auth-card">
+      <a class="brand auth-brand" href="#"><span class="brand-mark">Z</span><span>ZUNO <b>AI</b></span></a>
+      <p class="eyebrow">مساحة عملك الذكية</p>
+      <h1 id="authTitle">مرحباً بعودتك</h1>
+      <p class="auth-subtitle" id="authSubtitle">سجّل الدخول للمتابعة إلى ZUNO AI.</p>
+      <form id="authForm">
+        <label id="nameField" class="auth-field hidden">الاسم
+          <input id="displayName" type="text" autocomplete="name" placeholder="اسمك" />
+        </label>
+        <label id="usernameField" class="auth-field hidden">اسم المستخدم
+          <input id="username" type="text" autocomplete="username" placeholder="username" minlength="3" maxlength="30" />
+        </label>
+        <label class="auth-field">البريد الإلكتروني
+          <input id="email" type="email" autocomplete="email" placeholder="name@example.com" required />
+        </label>
+        <label class="auth-field">كلمة المرور
+          <input id="password" type="password" autocomplete="current-password" placeholder="6 أحرف على الأقل" minlength="6" required />
+        </label>
+        <p class="auth-error" id="authError" role="alert"></p>
+        <button class="auth-submit" id="authSubmit" type="submit">تسجيل الدخول</button>
+      </form>
+      <button class="auth-switch" id="authSwitch" type="button">ليس لديك حساب؟ أنشئ حساباً</button>
+      <p class="auth-foot">بياناتك ومحادثاتك محفوظة بحسابك وبصلاحيات خاصة.</p>
+    </div>
+  </section>
+
+  <div class="app-shell hidden" id="appShell">
     <aside class="sidebar" id="sidebar">
       <a class="brand" href="#"><span class="brand-mark">Z</span><span>ZUNO <b>AI</b></span></a>
       <button class="new-chat" id="newChat">＋ محادثة جديدة</button>
       <div class="side-label">مساحة العمل</div>
       <button class="nav-item active">✧ <span>المساعد الذكي</span></button>
-      <button class="nav-item">⌘ <span>إنشاء موقع</span><em>قريباً</em></button>
-      <button class="nav-item">▧ <span>الملفات والصور</span><em>قريباً</em></button>
-      <button class="nav-item">◷ <span>المحادثات</span></button>
-      <div class="sidebar-bottom"><div class="avatar">N</div><div><strong>حساب ZUNO</strong><small>مساحة شخصية</small></div><span class="settings">⚙</span></div>
+      <button class="nav-item" type="button">⌘ <span>إنشاء موقع</span><em>قريباً</em></button>
+      <button class="nav-item" type="button">▧ <span>الملفات والصور</span><em>قريباً</em></button>
+      <div class="side-label history-label">المحادثات السابقة</div>
+      <div class="history-list" id="historyList"></div>
+      <div class="sidebar-bottom">
+        <div class="avatar">Z</div>
+        <div class="account-copy"><strong id="accountName">حساب ZUNO</strong><small id="accountEmail">مساحة شخصية</small></div>
+        <button class="logout" id="logoutBtn" type="button">خروج</button>
+      </div>
     </aside>
     <main class="main">
-      <header class="topbar"><button class="menu" id="menuBtn" aria-label="القائمة">☰</button><span class="top-title">المساعد الذكي</span><div class="top-actions"><span class="status-dot"></span><span>نسخة تجريبية</span></div></header>
+      <header class="topbar"><button class="menu" id="menuBtn" aria-label="القائمة">☰</button><span class="top-title">المساعد الذكي</span><div class="top-actions"><span class="status-dot"></span><span>متصل بقاعدة البيانات</span></div></header>
       <section class="workspace">
         <div class="welcome" id="welcome">
           <div class="spark">✳</div>
@@ -41,12 +73,14 @@
         <div class="messages" id="messages" aria-live="polite"></div>
         <form class="composer" id="composer">
           <textarea id="prompt" rows="1" placeholder="اكتب سؤالك أو فكرتك هنا..." aria-label="اكتب رسالتك"></textarea>
-          <div class="composer-bottom"><div class="composer-hint">ZUNO قد يخطئ أحياناً؛ راجع المعلومات المهمة.</div><button class="send" type="submit" aria-label="إرسال">↑</button></div>
+          <div class="composer-bottom"><div class="composer-hint">محادثاتك تُحفظ تلقائياً في حسابك.</div><button class="send" type="submit" aria-label="إرسال">↑</button></div>
         </form>
         <footer>صُنع ليمنح أفكارك مساحة أكبر <span>✳ ZUNO AI</span></footer>
       </section>
     </main>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
